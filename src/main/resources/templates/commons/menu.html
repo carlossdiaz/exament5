@@ -12,9 +12,29 @@
                             <a class="nav-link active" aria-current="page" th:href="@{/welcome}"
                                 href="welcome.html">Inicio</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','MAT')">
                             <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/matematicas}"
                                 href="welcome.html">Matemáticas</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','LEN')">
+                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/lengua}"
+                                href="welcome.html">Lengua</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','ING')">
+                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/ingles}"
+                                href="welcome.html">Inglés</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','REL')">
+                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/religion}"
+                                href="welcome.html">Religión</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','FIS')">
+                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/fisica}"
+                                href="welcome.html">Física</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','QUI')">
+                            <a class="nav-link active" aria-current="page" th:href="@{/asignaturas/quimica}"
+                                href="welcome.html">Química</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/logout}"><i class="bi bi-box-arrow-left" th:text="logout"></i></a>

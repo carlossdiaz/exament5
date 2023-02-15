@@ -34,6 +34,9 @@ class AlumnoRepositoryTests {
 		Alumno u1 = new Alumno();
 		u1.setCodigo(1);
 		u1.setUserName("alumno1");
+		u1.setEmail("alumno1");
+		u1.setNombre("alumno1");
+		u1.setTelefono("alumno1");
 		u1.setPassword(encoder.encode("1234"));
 
         Alumno u2 = new Alumno();
@@ -45,6 +48,11 @@ class AlumnoRepositoryTests {
 		u3.setCodigo(3);
 		u3.setUserName("alumno3");
 		u3.setPassword(encoder.encode("1234"));
+
+		Alumno director = new Alumno();
+		director.setCodigo(4);
+		director.setUserName("director");
+		director.setPassword(encoder.encode("1234"));
 
         
 
@@ -78,17 +86,45 @@ class AlumnoRepositoryTests {
 		a6.setDescrripcion("Química");
 		repoAsignatura.save(a6);
 
+		Asignatura admin = new Asignatura();
+		admin.setCodigo("ADMIN");
+		admin.setDescrripcion("ADMIN");
+		repoAsignatura.save(admin);
+
 		List<Asignatura> asignaturaAlumno1 = new ArrayList<Asignatura>();
 		asignaturaAlumno1.add(a1);
 		asignaturaAlumno1.add(a2);
-		asignaturaAlumno1.add(a3);
+		asignaturaAlumno1.add(a5);
+
+		List<Asignatura> asignaturaAlumno2 = new ArrayList<Asignatura>();
+		asignaturaAlumno2.add(a1);
+		asignaturaAlumno2.add(a3);
+		asignaturaAlumno2.add(a4);
+
+		List<Asignatura> directorAsignaturas = new ArrayList<Asignatura>();
+		directorAsignaturas.add(admin);
 
 		u1.setAsignaturas(asignaturaAlumno1);
+		u2.setAsignaturas(asignaturaAlumno2);
+		director.setAsignaturas(directorAsignaturas);
+
+		Alumno saveAlumno1 = repoAlumno.save(u1);
+		Alumno saveAlumno2 = repoAlumno.save(u2);
+		Alumno saveAlumno3 = repoAlumno.save(u3);
+		Alumno saveAlumno4 = repoAlumno.save(director);
+		
+		assertTrue(saveAlumno1.getUserName().equalsIgnoreCase(u1.getUserName()));
+		assertTrue(saveAlumno2.getUserName().equalsIgnoreCase(u2.getUserName()));
+		assertTrue(saveAlumno3.getUserName().equalsIgnoreCase(u3.getUserName()));
+		assertTrue(saveAlumno4.getUserName().equalsIgnoreCase(director.getUserName()));
+
+	
 
 
-		Alumno u1OK = repoAlumno.save(u1);
+		/*Alumno u1OK = repoAlumno.save(u1);
 
-		assertTrue(a6.getDescrripcion().equalsIgnoreCase("QUI"));
+		assertTrue(a6.getCodigo().equalsIgnoreCase("QUI"));
+		*/
 	}
 
 }

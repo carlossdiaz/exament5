@@ -2,9 +2,14 @@ package com.oretania.portal.models;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Alumno {
@@ -16,10 +21,22 @@ public class Alumno {
     private String email;
     private String telefono;
 
-    private String userName;
-    private String password;
 
+    @Column(name = "username")
+    private String userName;
+    @Column(name = "password")
+    private String password;
     
+
+    @ManyToMany
+    @JoinTable(name="alumno_asignatura",
+        joinColumns=
+            @JoinColumn(name="alumno_codigo"),
+        inverseJoinColumns=
+            @JoinColumn(name="asignatura_codigo")
+        )
+    
+    List<Asignatura> asignaturas;
 
     public Alumno(int codigo) {
         this.codigo = codigo;
